@@ -86,6 +86,44 @@
 </head>
 
 <body>
-    <h1>Hello from my GitHub Page!</h1>
+
+    <div id="login-area">
+        <h1>Welcome to the Chatroom</h1>
+        <label for="nickname">Enter your nickname:</label>
+        <input type="text" id="nickname" placeholder="e.g., LihuaMeow">
+        <button onclick="joinChat()">Join Chat</button>
+    </div>
+
+    <div id="chat-area">
+        <h2>Welcome, <span id="user-display"></span>!</h2>
+        <div id="messages">
+            </div>
+        <input type="text" id="message-input" placeholder="Type a message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+
 </body>
+
+
+<style>
+    /* Basic styling for the sign-in area */
+    #login-area {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    #chat-area {
+        display: none; /* Hide the chat area until the user joins */
+    }
+    #messages {
+        height: 300px; 
+        border: 1px solid #000; 
+        overflow-y: scroll; 
+        padding: 10px;
+    }
+</style>
 </html>
