@@ -2,7 +2,89 @@
 <html>
 <head>
     <title>Chatroom Project</title>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <script>
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyCWeH78pn1WTBxBlRT6rInjwVSfGsE4ARM",
+        authDomain: "chatroom-3737d.firebaseapp.com",
+        databaseURL: "https://chatroom-3737d-default-rtdb.europe-west1.firebasedatabase.app",
+        projectId: "chatroom-3737d",
+        storageBucket: "chatroom-3737d.firebasestorage.app",
+        messagingSenderId: "724697907633",
+        appId: "1:724697907633:web:9228c5f286cfba549b7d90",
+        measurementId: "G-GKSZBMKNG2"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    let userName = ''; // This variable will store the nickname
+
+    // --- NEW FUNCTIONALITY: Joining the Chat ---
+    function joinChat() {
+        userName = document.getElementById('nickname').value.trim();
+        if (userName) {
+            // Update UI
+            document.getElementById('login-area').style.display = 'none';
+            document.getElementById('chat-area').style.display = 'block';
+            document.getElementById('user-display').textContent = userName;
+
+            // Start listening for new messages in real-time
+            listenForMessages();
+        } else {
+            alert('Please enter a nickname.');
+        }
+    }
+
+    // --- NEW FUNCTIONALITY: Sending a Message ---
+    async function sendMessage() {
+        const input = document.getElementById('message-input');
+        const message = input.value.trim();
+        if (message && userName) {
+            // Write the new message to Firestore
+            await db.collection('messages').add({
+                sender: userName,
+                text: message,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp() // Store time
+            });
+            input.value = ''; // Clear the input field
+        }
+    }
+
+    // --- NEW FUNCTIONALITY: Receiving Messages in Real-time ---
+    function listenForMessages() {
+        // This sets up the REAL-TIME listener
+        db.collection('messages')
+          .orderBy('timestamp', 'asc') // Sort by time
+          .limit(50) // Only get the last 50 messages
+          .onSnapshot(snapshot => {
+            // When ANY change happens in the 'messages' collection, this runs
+            const messagesDiv = document.getElementById('messages');
+            messagesDiv.innerHTML = ''; // Clear current messages
+
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                if (data.sender && data.text) {
+                    appendMessage(data.sender, data.text);
+                }
+            });
+          });
+    }
+
+    function appendMessage(sender, text) {
+        const messagesDiv = document.getElementById('messages');
+        const p = document.createElement('p');
+        p.innerHTML = `<strong>${sender}</strong>: ${text}`;
+        messagesDiv.appendChild(p);
+        messagesDiv.scrollTop = messagesDiv.scrollHeight; // Auto-scroll
+    }
+</script>
 </head>
+
 <body>
     <h1>Hello from my GitHub Page!</h1>
 </body>
