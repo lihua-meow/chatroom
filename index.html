@@ -36,6 +36,14 @@
 
             // Start listening for new messages in real-time
             listenForMessages();
+
+            document.getElementById('message-input').addEventListener('keypress', function(e) {
+            // Check if the pressed key is 'Enter' (key code 13)
+            if (e.key === 'Enter') {
+                e.preventDefault(); // Prevents the default action (like form submission)
+                sendMessage();      // Call your existing send message function
+            }
+        });
         } else {
             alert('Please enter a nickname.');
         }

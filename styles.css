@@ -9,6 +9,12 @@ body {
     justify-content: center;
 }
 
+#chat-area {
+    /* THIS IS THE CRUCIAL LINE to hide the chat initially */
+    display: none; 
+    min-height: 500px;
+}
+
 /* Styles for the main container (either login or chat) */
 #login-area, #chat-area {
     background-color: #ffffff; /* White background for the main box */
