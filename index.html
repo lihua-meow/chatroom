@@ -59,6 +59,7 @@
     // --- NEW FUNCTIONALITY: Receiving Messages in Real-time ---
     function listenForMessages() {
         // This sets up the REAL-TIME listener
+
         db.collection('messages')
           .orderBy('timestamp', 'asc') // Sort by time
           .limit(50) // Only get the last 50 messages
@@ -87,7 +88,6 @@
 </head>
 
 <body>
-
     <div id="login-area">
         <h1>Welcome to the Chatroom</h1>
         <label for="nickname">Enter your nickname:</label>
@@ -96,13 +96,17 @@
     </div>
 
     <div id="chat-area">
+        <h2>Welcome, <span id="user-display"></span>!</h2>
+        
+        <div id="messages">
+            </div>
+        
         <div id="chat-input-row">
             <input type="text" id="message-input" placeholder="Type a message...">
             <button onclick="sendMessage()">Send</button>
         </div>
     </div>
 </body>
-
 
 
 </html>
