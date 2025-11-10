@@ -1,0 +1,110 @@
+/* -------------------- GENERAL STYLES -------------------- */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5; /* Light grey background */
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Styles for the main container (either login or chat) */
+#login-area, #chat-area {
+    background-color: #ffffff; /* White background for the main box */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    padding: 30px;
+    max-width: 600px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+h1, h2 {
+    color: #1877f2; /* Blue for titles */
+    margin-top: 0;
+    text-align: center;
+}
+
+/* -------------------- LOGIN AREA -------------------- */
+#login-area {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* Stretch input/button full width */
+    gap: 15px; /* Space between elements */
+}
+
+/* -------------------- INPUTS AND BUTTONS -------------------- */
+input[type="text"] {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #1877f2;
+    outline: none;
+}
+
+button {
+    background-color: #1877f2;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #145cb7; /* Darker blue on hover */
+}
+
+/* -------------------- CHAT AREA -------------------- */
+#chat-area {
+    display: none; /* Controlled by JavaScript */
+    min-height: 500px;
+}
+
+#user-display {
+    color: #e44d26; /* Highlight the user's name */
+    font-weight: bold;
+}
+
+/* Message Display Box */
+#messages {
+    height: 300px; 
+    border: 1px solid #e0e0e0; 
+    border-radius: 6px;
+    overflow-y: scroll; 
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #f9f9f9;
+}
+
+/* Individual Message Styles */
+#messages p {
+    margin: 5px 0;
+    padding: 5px 8px;
+    line-height: 1.4;
+    word-wrap: break-word; /* Ensure long words break */
+}
+
+/* Styling for the message sender's name */
+#messages strong {
+    color: #333;
+    margin-right: 5px;
+}
+
+/* Input bar and send button at the bottom of the chat */
+#chat-input-row {
+    display: flex;
+    gap: 10px;
+}
+
+#message-input {
+    flex-grow: 1; /* Make the input field take up most of the space */
+}
